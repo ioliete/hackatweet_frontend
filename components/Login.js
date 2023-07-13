@@ -1,4 +1,5 @@
 import styles from '../styles/Login.module.css';
+import SignUp from './SignUp';
 
 function Login() {
   return (
@@ -16,6 +17,7 @@ function Login() {
             <button>Sign In</button>
         </div>
       </div>
+      <SignUp />
     </main>
   );
 }

@@ -13,7 +13,7 @@ function SignUp() {
   const [signUpUsername, setSignUpUsername] = useState("");
   const [signUpPassword, setSignUpPassword] = useState("");
 
-  const handleRegister = () => {
+  const handleSignUp = () => {
     fetch("http://localhost:3000/users/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -34,9 +34,7 @@ function SignUp() {
     setIsModalVisible(!isModalVisible);
   };
 
-  let modalContent;
-  if (!user.isConnected) {
-    modalContent = (
+  let modalContent = (
       <div className={styles.registerContainer}>
         <div className={styles.registerSection}>
           <p>Sign-up</p>
@@ -61,13 +59,13 @@ function SignUp() {
             onChange={(e) => setSignUpPassword(e.target.value)}
             value={signUpPassword}
           />
-          <button id="register" onClick={() => handleRegister()}>
+          <button id="signup" onClick={() => handleSignUp()}>
             Sign up
           </button>
         </div>
       </div>
     );
-  }
+  
 
   let userSection;
   if (user.token) {

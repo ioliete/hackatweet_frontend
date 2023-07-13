@@ -1,0 +1,22 @@
+.main {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 2fr 3fr;
+    justify-content: center;
+    align-items: stretch;
+    min-height: 100vh;
+    padding: 0;
+}
+
+.bg {
+    background: url('/images/background.png');
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1em;
+    color: white;
+    background-color: #161d28;
+}

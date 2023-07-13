@@ -9,14 +9,41 @@
 }
 
 .bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: url('/images/background.png');
+}
+.bg svg {
+    width: 70%;
+    height: auto;
+    fill: white;
+    transform: rotate(180deg);
+    animation: piou-piou 1s linear infinite;
 }
 
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 1em;
     color: white;
     background-color: #161d28;
+}
+@keyframes piou-piou {
+    0% { transform: rotate(0) }
+    50% { transform: rotate(180deg); }
+    100% { transform: rotate(0) }
+}
+@keyframes piou-piou2 {
+    0% { transform: rotate(0) }
+    50% { transform: rotate(180deg); }
+    100% { transform: rotate(360deg) }
+}
+.container svg {
+    width: 5em;
+    height: auto;
+    fill: white;
+    transsform: rotate(180deg);
+    animation: piou-piou2 1s linear infinite;
 }

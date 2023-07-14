@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 //import { useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import styles from "../styles/LastTweets.module.css";
 
 function LastTweets() {

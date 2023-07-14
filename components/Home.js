@@ -1,10 +1,25 @@
-import styles from "../styles/Home.module.css";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { Button } from "antd";
+import { Button, Input } from "antd";
 import LastTweets from './LastTweets';
 
+import styles from "../styles/Home.module.css";
+
+const { TextArea } = Input;
+
 function Home() {
+
+  const [ lengthTweet, SetlengthTweet ] = useState(0);
+
+  const handleLogout = () => {
+
+  }
+
+  const handleInput = (e) => {
+    SetlengthTweet(e.target.textContent.length);
+  }
+
   return (
     <div>
       <main className={styles.main}>
@@ -16,28 +31,24 @@ function Home() {
           </svg>
           <div className={styles.userContainer}>
             <div className={styles.user}>
-              <img
-                src="./images/twitterEgg.png"
-                className={styles.profilePic}
-                alt="Profile pic"
-                width={50}
-                border-radius={50}
-              />
-              <p className={styles.firstname}>John</p>
-              <p className={styles.username}>John</p>
+              <img src="./images/twitterEgg.png" className={styles.profilePic} alt="Profile pic" />
+              <div>
+                <p className={styles.firstname}>John</p>
+                <p className={styles.username}>John</p>
+              </div>
             </div>
-            <button className={styles.logOutButton}>Log out</button>
+            <Button shape="round" ghost onClick={handleLogout}>Log out</Button>
           </div>
         </div>
 
         <div className={styles.middleBarUp}>
           <h2 className={styles.home}>Home</h2>
-          <input type="text" className={styles.newTweet} placeholder="What's up?" />
+          <TextArea placeholder="What's up?" allowClear onChange={handleInput} />
           <div className={styles.newTweetParameters}> 
-            <p className={styles.count}>0/280</p>
+            <p className={styles.count}>{280 - lengthTweet}/280</p>
             <Button type="primary" shape="round">
-            Tweet
-          </Button>
+              Tweet
+            </Button>
           </div>
         </div>
 

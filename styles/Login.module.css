@@ -19,7 +19,14 @@
     height: auto;
     fill: white;
     transform: rotate(180deg);
+}
+.bg svg:hover {
     animation: piou-piou 1s linear infinite;
+}
+@keyframes piou-piou {
+    0% { transform: rotate(180deg) }
+    50% { transform: rotate(0); }
+    100% { transform: rotate(180deg) }
 }
 
 .container {
@@ -30,20 +37,40 @@
     color: white;
     background-color: #161d28;
 }
-@keyframes piou-piou {
-    0% { transform: rotate(0) }
-    50% { transform: rotate(180deg); }
-    100% { transform: rotate(0) }
+.container h1, .container h2 {
+    font-family: Mont-Heavy;
+    margin: 0.5em 0;
+    padding: 0;
+}
+.container h1 {
+    font-size: 5em;
+}
+.container h2 {
+    font-size: 2em;
+}
+
+.containerButtons {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    margin: 2em auto 0 0;
+    font-weight: bold;
+}
+
+.containerLogin {
+    background-color: #161d28;
 }
 @keyframes piou-piou2 {
-    0% { transform: rotate(0) }
-    50% { transform: rotate(180deg); }
-    100% { transform: rotate(360deg) }
+    0% { transform: rotate(180deg) }
+    50% { transform: rotate(0deg); }
+    100% { transform: rotate(-180deg) }
 }
-.container svg {
+.containerLogin svg {
     width: 5em;
     height: auto;
-    fill: white;
-    transsform: rotate(180deg);
+    fsill: white;
+    transform: rotate(180deg);
+}
+.containerLogin svg:hover {
     animation: piou-piou2 1s linear infinite;
 }

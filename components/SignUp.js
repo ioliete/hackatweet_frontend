@@ -1,134 +1,84 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Modal } from "antd";
+import { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { Button, Input, Space, Modal } from "antd";
 
 import styles from "../styles/Login.module.css";
 
-function SignUp() {
+function SignUp(props) {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.value);
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [signUpFirstname, setSignUpFirstname] = useState("");
-  const [signUpUsername, setSignUpUsername] = useState("");
-  const [signUpPassword, setSignUpPassword] = useState("");
+  let viewError;
+  const firstnameRef = useRef(null);
+  const usernameRef = useRef(null);
+  const passwordRef = useRef(null);
 
   const handleSignUp = () => {
+    //! POST /users/login payload
+    //? ref.current?.value => the .key?. is called optional chaining
+    // it is necessary in this case because the refs are initialized as null
+    const formBody = {
+      firstname: firstnameRef.current?.value,
+      username: usernameRef.current?.value,
+      password: passwordRef.current?.value,
+    };
+    console.log(formBody);
+
     fetch("http://localhost:3000/users/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ firstname: signUpFirstname, username: signUpUsername, password: signUpPassword }),
+      body: JSON.stringify(formBody),
     })
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
-          dispatch(login(signUpUsername));
-          setSignUpFirstname("");
-          setSignUpUsername("");
-          setSignUpPassword("");
+          const { firstname, username, token } = data;
+          dispatch(login({ firstname, username, token }));
+          console.log({ firstname, username, token });
+        } else {
+          viewError = <p style={{ color: "red" }}>{result.error}</p>;
         }
       });
   };
 
-  const showModal = () => {
-    setIsModalVisible(!isModalVisible);
+  const handleHidden = () => {
+    props.setSignUpVisible(false);
   };
 
-  let modalContent = (
-      <div className={styles.registerContainer}>
-        <div className={styles.registerSection}>
-          <p>Sign-up</p>
-          <input
-            type="text"
+  if (props.isVisible) {
+    return (
+      <Modal
+        className={styles.containerLogin}
+        centered
+        open={props.isVisible}
+        closable={true}
+        onCancel={handleHidden}
+        footer={null}
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <g>
+            <path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"></path>
+          </g>
+        </svg>
+        <p>Create your Hackatweet account</p>
+        <Space direction="vertical">
+          <Input
             placeholder="Firstname"
             id="signUpFirstname"
-            onChange={(e) => setSignUpFirstname(e.target.value)}
-            value={signUpFirstname}
+            ref={firstnameRef}
           />
-          <input
-            type="text"
-            placeholder="Username"
-            id="signUpUsername"
-            onChange={(e) => setSignUpUsername(e.target.value)}
-            value={signUpUsername}
-          />
-          <input
-            type="password"
-            placeholder="Password"
+          <Input placeholder="Username" id="signUpUsername" ref={usernameRef} />
+          <Input.Password
+            placeholder="input password"
             id="signUpPassword"
-            onChange={(e) => setSignUpPassword(e.target.value)}
-            value={signUpPassword}
+            ref={passwordRef}
           />
-          <button id="signup" onClick={() => handleSignUp()}>
+          <Button id="signup" onClick={handleSignUp}>
             Sign up
-          </button>
-        </div>
-      </div>
+          </Button>
+        </Space>
+      </Modal>
     );
-  
-
-  let userSection;
-  if (user.token) {
-    userSection = (
-      <>
-        <div className={styles.logoutSection}>
-          <p>Welcome {user.username} / </p>
-          <button onClick={() => handleLogout()}>Logout</button>
-        </div>
-        <div className={styles.headerIcons}>
-          <FontAwesomeIcon onClick={handleShowAllArticles} className={styles.userSection} icon={faEye} />
-        </div>
-      </>
-    );
-  } else {
-    if (isModalVisible) {
-      userSection = (
-        <>
-          <div className={styles.headerIcons}>
-            <FontAwesomeIcon onClick={showModal} className={styles.userSection} icon={faXmark} />
-          </div>
-
-          <div className={styles.headerIcons}>
-            <FontAwesomeIcon onClick={handleShowAllArticles} className={styles.userSection} icon={faEye} />
-          </div>
-        </>
-      );
-    } else {
-      userSection = (
-        <>
-          <div className={styles.headerIcons}>
-            <FontAwesomeIcon onClick={showModal} className={styles.userSection} icon={faUser} />
-          </div>
-          <div className={styles.headerIcons}>
-            <FontAwesomeIcon onClick={handleShowAllArticles} className={styles.userSection} icon={faEye} />
-          </div>
-        </>
-      );
-    }
   }
-
-  return (
-    <header className={styles.header}>
-      <div className={styles.logoContainer}>
-        <h1 className={styles.title}>Create your Hackatweet account</h1>
-        {userSection}
-      </div>
-
-      {isModalVisible && (
-        <div id="react-modals">
-          <Modal
-            getContainer="#react-modals"
-            className={styles.modal}
-            visible={isModalVisible}
-            closable={false}
-            footer={null}
-          >
-            {modalContent}
-          </Modal>
-        </div>
-      )}
-    </header>
-  );
 }
 
 export default SignUp;

@@ -1,20 +1,31 @@
+
 .main {
-  background-color: #161D28;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  /*background-color: #161D28;*/
   display: grid;
-  grid-template-columns: repeat(1fr, 4) ;
-  grid-template-rows: repeat(1fr, 5) ;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
+  grid-template-columns: 1fr 2fr 1fr ;
+  grid-template-rows: 1fr 3fr ;
+  background-color: #161D28;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+}
+
+.main > div {
+  border: 3px solid red;
 }
 
 .leftBar { 
-  grid-area: 1 / 1 / 6 / 2;
-}
-
-.middleBar { 
-  grid-area: 1 / 2 / 6 / 4;
+  grid-area: 1 / 1 / 3 / 2;
+  display: flex;
+  justify-content: space-around;
 }
 
 .rightBar { 
-  grid-area: 1 / 4 / 6 / 5;
+  grid-area: 1 / 3 / 3 / 4;
+}
+
+.home, .trends, .firstname {
+  color: white;
 }

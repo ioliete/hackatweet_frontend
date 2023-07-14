@@ -22,12 +22,12 @@ function LastTweets() {
               <div className={styles.tweetInfos}>
                 <img src="./images/twitterEgg.png" className={styles.profilePic} alt="Profile pic" />
       
-                <h3 className={styles.firstname}>John</h3>
-                <h5 className={styles.username}>Johnjohn</h5>
+                <p className={styles.firstname}>John</p>
+                <p className={styles.username}>Johnjohn</p>
                 <span className={styles.date}>1 hour ago</span>
               </div>
       
-              <h4 className={styles.content}>{tweet.message}</h4>
+              <p className={styles.content}>{tweet.message}</p>
               <div className={styles.tweetActions}>
                 <FontAwesomeIcon className={styles.icon} icon={faHeart} />
                 <p className={styles.counterLike}>0</p>

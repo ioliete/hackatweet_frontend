@@ -1,3 +1,110 @@
-.gdggfdsefc {
-    color: blue;
-}
+.firstname, .username {
+    margin: 5;
+    padding: 5;
+  }
+  
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr ;
+    grid-template-rows: 1fr 3fr ;
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    color: white;
+    background-color: #151d27;
+  }
+  
+  .main > div {
+    border: 3px solid red;
+  }
+  
+  .leftBar { 
+    grid-area: 1 / 1 / 3 / 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1em 2em;
+  }
+  svg.logo {
+    fill: white;
+    height: 40px;
+    transform: rotate(180deg);
+  }
+  @keyframes piou-piou {
+    0% { transform: rotate(180deg) }
+    50% { transform: rotate(0deg); }
+    100% { transform: rotate(-180deg) }
+  }
+  svg.logo:hover {
+    animation: piou-piou 1s linear infinite;
+  }
+  .userContainer {
+    width: 100%;
+  }
+  .user img {
+    display: inline-block;
+    float: left;
+  }
+  .logOutButton {
+    clear: left;
+  }
+  
+  .middleBarUp {
+    background-color: aqua;
+  }
+  
+  .profilePic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  .tweetsContainer {
+    background-color: blanchedalmond;
+  }
+  
+  .rightBar { 
+    grid-area: 1 / 3 / 3 / 4;
+  }
+  
+  .username, .trendTweetCount {
+    color: rgb(78, 76, 76)
+  }
+  
+  .tweetInfos {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 2px;
+  }
+  
+  .trendsContainer {
+    background-color: #1b222d;
+  }
+  
+  .newTweet {
+    width: 90%;
+    background-color: none;
+    justify-content: right;
+  }
+  
+  
+  .icon {
+    fill: white;
+  }
+  
+  .newTweetParameters {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  
+  }
+
+  .tweetActions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+  }

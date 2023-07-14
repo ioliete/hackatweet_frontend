@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from '../styles/Login.module.css';
-import SignUp from './SignUp';
-import SignIn from './SignIn';
+import SignUp from '../components/SignUp';
+import SignIn from '../components/SignIn';
 import { Button } from "antd";
 
 function Login() {

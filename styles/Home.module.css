@@ -19,13 +19,58 @@
 .leftBar { 
   grid-area: 1 / 1 / 3 / 2;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 10px;
+  
 }
 
 .rightBar { 
   grid-area: 1 / 3 / 3 / 4;
 }
 
-.home, .trends, .firstname {
+.home, .trends, .firstname, .hashtagContent {
   color: white;
+}
+
+.username, .trendTweetCount {
+  color: rgb(78, 76, 76)
+}
+
+.tweetInfos {
+  display: flex;
+  flex-direction: row;
+}
+
+.trendsContainer {
+  background-color: #1b222d;
+}
+
+.newTweet {
+  width: 90%;
+  background-color: none;
+  justify-content: right;
+}
+
+.profilePic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.logo svg {
+  fill: white;
+  height: 40px;
+  transform: rotate(180deg);
+}
+
+.icon {
+  fill: white;
+}
+
+.newTweetParameters {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
 }

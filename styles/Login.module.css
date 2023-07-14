@@ -68,7 +68,7 @@
 .containerLogin svg {
     width: 5em;
     height: auto;
-    fsill: white;
+    fill: white;
     transform: rotate(180deg);
 }
 .containerLogin svg:hover {

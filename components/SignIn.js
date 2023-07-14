@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
-import { Button, Input, Space, Modal } from "antd";
+import { Button, Input, Form, Modal } from "antd";
 
 import styles from "../styles/Login.module.css";
 
@@ -8,18 +8,18 @@ function SignIn(props) {
   const dispatch = useDispatch();
 
   let viewError;
-  const usernameRef = useRef(null);
-  const passwordRef = useRef(null);
+  let connectionResult = false;
 
-  //! POST /users/login payload
-  //? ref.current?.value => the .key?. is called optional chaining
-  // it is necessary in this case because the refs are initialized as null
-  const formBody = {
-    username: usernameRef.current?.value,
-    password: passwordRef.current?.value,
+
+  const handleHidden = () => {
+    props.setSignInVisible(false);
   };
 
-  const handleSignIn = () => {
+  const onFinish = (values) => {
+    const formBody = {
+      username: values.username,
+      password: values.password,
+    };
     fetch("http://localhost:3000/users/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -30,16 +30,64 @@ function SignIn(props) {
         if (data.result) {
           const { username, firstname, token } = data;
           dispatch(login({ firstname, username, token }));
-          console.log({ firstname, username, token });
+          console.log('Success:', { firstname, username, token });
         } else {
-          viewError = <p style={{ color: "red" }}>{result.error}</p>;
+          console.error('Failed:', data.error);
+          connectionResult = true;
         }
       });
   };
 
-  const handleHidden = () => {
-    props.setSignInVisible(false);
+  const onFinishFailed = (errorInfo) => {
+    console.error('Failed:', errorInfo);
+    viewError = <h3>{errorInfo}</h3>;
   };
+
+  let modalContent = (
+    <>
+    {viewError}
+    <Form
+      name="basic"
+      labelCol={{ span: 8 }}
+      wrapperCol={{ span: 16 }}
+      style={{ maxWidth: 600 }}
+      initialValues={{ remember: true }}
+      onFinish={onFinish}
+      onFinishFailed={onFinishFailed}
+      autoComplete="off"
+    >
+      <Form.Item
+        label="Username"
+        name="username"
+        rules={[{ required: true, message: 'Please input your username!' }]}
+      >
+        <Input />
+      </Form.Item>
+      <Form.Item
+        label="Password"
+        name="password"
+        rules={[{ required: true, message: 'Please input your password!' }]}
+      >
+        <Input.Password />
+      </Form.Item>
+      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+        <Button type="primary" htmlType="submit">
+          Sign in
+        </Button>
+      </Form.Item>
+    </Form>
+    </>
+  );
+  if (connectionResult) {
+    modalContent = (
+    <Result
+      status="success"
+      title={"Welcolme "+username}
+      subTitle=""
+      extra={[]}
+    />
+    )
+  }
 
   if (props.isVisible) {
     return (
@@ -61,21 +109,7 @@ function SignIn(props) {
                 </g>
               </svg>
               <p>Connect to Hackatweet</p>
-              <Space direction="vertical">
-                <Input
-                  placeholder="Username"
-                  id="signInUsername"
-                  ref={usernameRef}
-                />
-                <Input.Password
-                  placeholder="input password"
-                  id="signInPassword"
-                  ref={passwordRef}
-                />
-                <Button id="signin" onClick={handleSignIn}>
-                  Sign in
-                </Button>
-              </Space>
+              {modalContent}
             </div>
           </div>
         </Modal>

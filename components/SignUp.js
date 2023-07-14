@@ -47,7 +47,7 @@ function SignUp(props) {
   if (props.isVisible) {
     return (
       <Modal
-        className={styles.containerLogin}
+        
         centered
         open={props.isVisible}
         closable={true}

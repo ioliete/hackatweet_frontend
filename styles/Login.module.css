@@ -57,20 +57,25 @@
     font-weight: bold;
 }
 
-.containerLogin {
-    background-color: #161d28;
-}
 @keyframes piou-piou2 {
     0% { transform: rotate(180deg) }
     50% { transform: rotate(0deg); }
     100% { transform: rotate(-180deg) }
 }
-.containerLogin svg {
+svg.twitter {
     width: 5em;
     height: auto;
     fsill: white;
     transform: rotate(180deg);
 }
-.containerLogin svg:hover {
+svg.twitter:hover {
     animation: piou-piou2 1s linear infinite;
+}
+
+.center {
+    text-align: center;
+}
+.errorMsg {
+    text-align: center;
+    color: #ff4d4f;
 }

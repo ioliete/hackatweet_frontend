@@ -1,4 +1,5 @@
 import styles from "../styles/Home.module.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function Home() {

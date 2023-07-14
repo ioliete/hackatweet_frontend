@@ -40,28 +40,7 @@ function Home() {
           </div>
         </div>
 
-        <div className={styles.tweetsContainer}>
-          <div className={styles.tweet}>
-          <div className={styles.tweetInfos}>
-              <img
-                src="./images/twitterEgg.png"
-                className={styles.profilePic}
-                alt="Profile pic"
-              />
 
-              <h3 className={styles.firstname}>John</h3>
-              <h5 className={styles.username}>Johnjohn</h5>
-              <span className={styles.date}>1 hour ago</span>
-          </div>
-            
-            <h4 className={styles.content}>Tweet message</h4>
-            <div className={styles.tweetActions}>
-              <FontAwesomeIcon className={styles.icon} icon={faHeart} />
-              <p className={styles.counterLike}>0</p>
-              <FontAwesomeIcon className={styles.icon} icon={faTrash} />
-            </div>
-          </div>
-        </div>
 
         <div className={styles.rightBar}>
           <h2 className={styles.trends}>Trends</h2>
